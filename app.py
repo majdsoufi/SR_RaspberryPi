@@ -5,10 +5,12 @@
 
 
 from flask import Flask,render_template,url_for,request
-import speech_recognition as sr
+#import speech_recognition as sr
+
+from random import randint
 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='.')
 
 @app.route('/')
 def home():
@@ -17,12 +19,13 @@ def home():
 @app.route('/speechtotext',methods=['POST'])
 
 def index():
-    if request.method == "POST":
-        recognizer = sr.Recognizer()
-        mic  = sr.Microphone()
-        with mic as source:
-            audio_data = recognizer.record(source)
-        my_text = recognizer.recognize_google(audio_data)
+    #if request.method == "POST":
+    #    recognizer = sr.Recognizer()
+    #    mic  = sr.Microphone()
+    #    with mic as source:
+    #        audio_data = recognizer.record(source)
+    #    my_text = recognizer.recognize_google(audio_data)
+    my_text = "HELLO: %d" % randint(100, 999) 
     return render_template('result.html',text = my_text)
 
 
